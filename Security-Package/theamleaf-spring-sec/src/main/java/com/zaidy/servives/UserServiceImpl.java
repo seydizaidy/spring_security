@@ -27,19 +27,14 @@ public class UserServiceImpl implements UserService{
 	@Lazy
 	private BCryptPasswordEncoder passwordEncoder;
 
-
-	public UserServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository)
+	{
 		this.userRepository = userRepository;
-
 	}
-
-
 
 	@Override
 	public User save(UserRegistrationDto registrationDto) {
 		User user = new User();
-
-
 	user.setFirstName(registrationDto.getFirstName());
 	user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
 	user.setLastName(registrationDto.getLastName());
@@ -63,5 +58,11 @@ public class UserServiceImpl implements UserService{
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
+
+//
+//	public Collection<? extends GrantedAuthority> getAuthorities() {
+//		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(new User().getRole());
+//		return Arrays.asList(authority);
+//	}
 	
 }
