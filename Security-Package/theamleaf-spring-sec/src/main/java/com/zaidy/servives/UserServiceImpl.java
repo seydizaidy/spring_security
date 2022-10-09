@@ -52,11 +52,18 @@ public class UserServiceImpl implements UserService{
 		}
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
 
-		//return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+		//ou : Cas d'une liste'
+		//return new org.springframework.security.core.userdetails.User(user.getEmail(),
+		// user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+
+		//ou
+//		GrantedAuthority authority = new SimpleGrantedAuthority(activeUserInfo.getRole());
+//		UserDetails userDetails = (UserDetails)new User(activeUserInfo.getUserName(),
+//				activeUserInfo.getPassword(), Arrays.asList(authority));
 	}
 	//non compris
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+			return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
 
 //
